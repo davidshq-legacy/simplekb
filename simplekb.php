@@ -10,7 +10,7 @@
  * License: GPL2
 */
 
-class SimpleKB_CPT {
+class SimpleKB {
 
     /**
      * Constructor: Called when plugin is initialized.
@@ -20,18 +20,17 @@ class SimpleKB_CPT {
 	function __construct() {
 		add_action( 'init', array( $this, 'skb_register_skb_cpt'));
         add_action( 'init', 'skb_register_taxonomy_subject');
-        add_shortcode('simplekb','skb_query');
 	}
 
 	/**
-     * Activation Hook: Registers SimpleKB Role to SimpleKB CPT
+     * Activation Hook: Registers SimpleKB Role to SimpleKB
      *
      * @since 0.1
      */
 	function plugin_activation() {
 	     // Set capabilities for role
         $customCaps = array(
-            // Permissions for SimpleKB CPT
+            // Permissions for SimpleKB
             'edit_others_skbs'          => true,
             'delete_others_skbs'        => true,
             'delete_private_skbs'       => true,
@@ -186,8 +185,8 @@ function skb_register_taxonomy_subject() {
 		'show_admin_column'       => true,
 		'query_var'               => true,
 		'rewrite'                 => array(
-		    'slug' => 'subject',
             'with_front' => 'false',
+		    'slug' => 'subject',
         ),
         'capabilities'            => $capabilities,
         'map_meta_cap'            => 'true'
@@ -201,15 +200,13 @@ function skb_register_taxonomy_subject() {
 	$wp_rewrite->flush_rules();
 }
 
-$SimpleKB_CPT = new SimpleKB_CPT;
-
 /**
- * Handle shortcode simplekb call.
+ * Create simplekb_all Shortcode
  *
  * @return string
  * @since 0.1
  */
-function skb_query() {
+function skb_get_kbs_shortcode() {
     $args = array(
         'post_type'    => 'skb',
         'post_status'  => 'publish'
@@ -229,5 +226,9 @@ function skb_query() {
     return $string;
 }
 
-register_activation_hook( __FILE__, array( &$SimpleKB_CPT, 'plugin_activation' ) );
-register_deactivation_hook( __FILE__, array( &$SimpleKB_CPT, 'plugin_deactivation' ) );
+add_shortcode('simplekb_all','skb_get_kbs_shortcode');
+
+$SimpleKB = new SimpleKB;
+
+register_activation_hook( __FILE__, array( &$SimpleKB, 'plugin_activation' ) );
+register_deactivation_hook( __FILE__, array( &$SimpleKB, 'plugin_deactivation' ) );

@@ -1,5 +1,5 @@
 # SimpleKB
-Version: 0.1 (10/11/2018)
+Version: 0.2 (10/12/2018)
 
 An intentionally simple WordPress Knowledge Base plugin.
 
@@ -20,3 +20,6 @@ If you need to provide individuals with access to the knowledge base plugin but 
 ## Authors
 
 This plugin was created by Dave Mackey. It is based on a simple plugin created by Dave and Rick Murtagh for Liquid Church.
+
+## Release Notes
+Please see the document RELEASENOTES.MD for the latest details about what has changed with this version of SimpleKB.
