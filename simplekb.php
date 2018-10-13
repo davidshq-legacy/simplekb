@@ -1,20 +1,20 @@
 <?php
 
 /**
-Plugin Name: SimpleKB
-Plugin URI: https://github.com/davidshq/simpleKB
-Description: Creates a Custom Post Type and associated Custom Taxonomies for an intentionally simple Knowledge Base.
-Version: 0.1
-Author: Dave Mackey
-Author URI: https://davemackey.net/
-License: GPL2
+ * Plugin Name: SimpleKB
+ * Plugin URI: https://github.com/davidshq/simpleKB
+ * Description: Creates a Custom Post Type and associated Custom Taxonomies for an intentionally simple Knowledge Base.
+ * Version: 0.1
+ * Author: Dave Mackey
+ * Author URI: https://davemackey.net/
+ * License: GPL2
 */
 
 class SimpleKB_CPT {
 
     /**
      * Constructor: Called when plugin is initialized.
-     * TODO: Flush permalinks on activation.
+     *
      * @since 0.1
      */
 	function __construct() {
@@ -195,6 +195,8 @@ function skb_register_taxonomy_subject() {
 
 	// Register taxonomy.
 	register_taxonomy( 'skb_subject', array( 'skb' ), $args );
+
+	// Flush permalinks.
 	global $wp_rewrite;
 	$wp_rewrite->flush_rules();
 }
