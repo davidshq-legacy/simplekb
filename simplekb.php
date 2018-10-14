@@ -75,6 +75,10 @@ class SimpleKB {
              }
          }
      }
+
+        // Flush permalinks.
+        global $wp_rewrite;
+        $wp_rewrite->flush_rules();
 	}
 
     /**
@@ -185,8 +189,8 @@ function skb_register_taxonomy_subject() {
 		'show_admin_column'       => true,
 		'query_var'               => true,
 		'rewrite'                 => array(
-            'with_front' => 'false',
-		    'slug' => 'subject',
+            'with_front' => false,
+		    'slug' => 'kb/subject',
         ),
         'capabilities'            => $capabilities,
         'map_meta_cap'            => 'true'
@@ -194,10 +198,6 @@ function skb_register_taxonomy_subject() {
 
 	// Register taxonomy.
 	register_taxonomy( 'skb_subject', array( 'skb' ), $args );
-
-	// Flush permalinks.
-	global $wp_rewrite;
-	$wp_rewrite->flush_rules();
 }
 
 /**
@@ -206,7 +206,7 @@ function skb_register_taxonomy_subject() {
  * @return string
  * @since 0.1
  */
-function skb_get_kbs_shortcode() {
+function skb_get_kbs_shortcode( $atts ) {
     $args = array(
         'post_type'    => 'skb',
         'post_status'  => 'publish'
@@ -226,7 +226,7 @@ function skb_get_kbs_shortcode() {
     return $string;
 }
 
-add_shortcode('simplekb_all','skb_get_kbs_shortcode');
+add_shortcode('simplekb','skb_get_kbs_shortcode');
 
 $SimpleKB = new SimpleKB;
 
