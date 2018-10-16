@@ -1,3 +1,6 @@
+# 0.2.1 - 10/16/18
+- Added additional information to README.md
+
 # 0.2 - 10/14/18
 - Changed SimpleKB_CPT class to SimpleKB.
 - Moved add_shortcode from __construct to after shortcode function.
